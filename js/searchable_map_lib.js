@@ -25,7 +25,7 @@ var SearchableMapLib = {
     options = options || {};
 
     SearchableMapLib.map_centroid = options.map_centroid || [41.881832, -87.623177],
-    SearchableMapLib.defaultZoom = options.defaultZoom || 9,
+    SearchableMapLib.defaultZoom = options.defaultZoom || 10,
     SearchableMapLib.filePath = options.filePath || "",
     SearchableMapLib.fileType = options.fileType || "csv",
     SearchableMapLib.csvOptions = options.csvOptions || {separator: ',', delimiter: '"'},
