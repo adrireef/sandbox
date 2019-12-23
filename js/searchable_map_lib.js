@@ -268,16 +268,13 @@ var SearchableMapLib = {
     //filter on location type. constructing a list of OR statements based on what checkboxes are selected
     var customFilters = [];
     if ( $("#cbType1").is(':checked')) {
-      customFilters.push('r.properties["Type"] === "Pharmacy"');
+      customFilters.push('r.properties["Type"] === "Natural"');
     }
     if ( $("#cbType2").is(':checked')) {
-      customFilters.push('r.properties["Type"] === "Government"');
+      customFilters.push('r.properties["Type"] === "Artificial"');
     }
     if ( $("#cbType3").is(':checked')) {
-      customFilters.push('r.properties["Type"] === "Other"');
-    }
-    if ( $("#cbType4").is(':checked')) {
-      customFilters.push('r.properties["Type"] === "Event"');
+      customFilters.push('r.properties["Type"] === "Wrecks"');
     }
 
     SearchableMapLib.currentResults.features = $.grep(SearchableMapLib.currentResults.features, function(r) {
@@ -289,12 +286,42 @@ var SearchableMapLib = {
         return eval(filter);
     });
     //-----end facility type filter-----
+    
+	//-----facility country filter-----
+    //filter on location type. constructing a list of OR statements based on what checkboxes are selected
+    var customFilters = [];
+    if ( $("#cbType4").is(':checked')) {
+      customFilters.push('r.properties["Country"] === "Italy"');
+    }
+    if ( $("#cbType5").is(':checked')) {
+      customFilters.push('r.properties["Country"] === "Croatia"');
+    }
+
+    SearchableMapLib.currentResults.features = $.grep(SearchableMapLib.currentResults.features, function(r) {
+        var filter = "";
+        for (var i = 0; i < customFilters.length; i++) { 
+          filter += customFilters[i] + " || " 
+        }
+        filter = filter.substring(0, filter.length - 3);
+        return eval(filter);
+    });
+    //-----end facility country filter-----
+
+    SearchableMapLib.currentResults.features = $.grep(SearchableMapLib.currentResults.features, function(r) {
+        var filter = "";
+        for (var i = 0; i < customFilters.length; i++) { 
+          filter += customFilters[i] + " || " 
+        }
+        filter = filter.substring(0, filter.length - 3);
+        return eval(filter);
+    });
+    //-----end facility country filter-----
 
     //-----name search filter-----
     var name_search = $("#search-name").val().replace("'", "\\'");
     if (name_search != '') {
       SearchableMapLib.currentResults.features = $.grep(SearchableMapLib.currentResults.features, function(r) {
-          return r.properties["Facility Name"].toLowerCase().indexOf(name_search.toLowerCase()) > -1;
+          return r.properties["Name"].toLowerCase().indexOf(name_search.toLowerCase()) > -1;
         });
     }
     //-----end name search filter-----
