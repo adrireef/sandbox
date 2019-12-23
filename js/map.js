@@ -15,7 +15,7 @@ $(function() {
     map_centroid: [42.669263,13.8859923],
     defaultZoom:  8,
     defaultRadius: 1610,
-    debug: false,
+    debug: true,
   });
 
   var autocomplete = new google.maps.places.Autocomplete(document.getElementById('search-address'));
